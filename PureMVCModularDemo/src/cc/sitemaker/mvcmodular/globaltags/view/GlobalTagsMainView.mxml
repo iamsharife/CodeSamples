@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.binding.utils.BindingUtils;
+			import mx.binding.utils.ChangeWatcher;
+			
+			public var dataFromProxy :ArrayList;
+			
+			
+			
+			public function initBinding  () : void {
+				BindingUtils.bindProperty(lstGlobalTags,"dataProvider", this,"dataFromProxy", false, true);
+			}
+			
+			public function removeBinding  () : void {
+			}
+			
+			public function update (val:ArrayList):void{
+				lstGlobalTags.dataProvider = val
+			}	
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<s:ArrayList id="globalTags" />
+	</fx:Declarations>
+	
+	<s:Label id="lbl" text="Global Tags" fontSize="24" />	
+	<s:List id="lstGlobalTags" width="100%" height="300"  labelField="name"/>
+	<s:HGroup width="100%">
+		<s:TextInput id="txtNewTag" />
+		<s:Button id="btnAddToPost" label="Save Tag"  />		
+	</s:HGroup>
+</s:VGroup>

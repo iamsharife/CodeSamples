@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="false">
+	
+	<s:layout>
+		<s:HorizontalLayout verticalAlign="middle" paddingBottom="2" paddingTop="2" paddingLeft="5" paddingRight="5" />
+	</s:layout>
+	
+	<s:Label text="{data.domain}" width="325"/>
+	
+	<s:HGroup verticalAlign="middle">
+		<s:Path verticalCenter="0" id="check"
+				data="M 9.2 0.1 L 4.05 6.55 L 3.15 5.0 L 0.05 5.0 L 4.6 9.7 L 12.05 0.1 L 9.2 0.1" width="15" height="15">        
+			<s:fill>
+				<!--- 
+				@private 
+				The solid color fill for the CheckBox's checkmark. The default alpha is .9, and the default fill color is 0x000000. 
+				-->
+				<s:SolidColor id="checkMarkFill" color="#FF0000" alpha="0.8" />
+			</s:fill>
+		</s:Path>
+		<s:Label text="Unavailable" />
+	</s:HGroup>
+	
+	<s:Label text="Whois" textDecoration="underline" />
+</s:ItemRenderer>

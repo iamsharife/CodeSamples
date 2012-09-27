@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="true">
+	
+	<s:layout>
+		<s:HorizontalLayout verticalAlign="middle" paddingBottom="2" paddingTop="2" paddingLeft="5" paddingRight="5" />
+	</s:layout>
+	
+	<s:CheckBox label="{data.domain}" width="325"/>
+	
+	<s:HGroup verticalAlign="middle" width="100%">
+		<s:Path verticalCenter="0" id="check"
+				data="M 9.2 0.1 L 4.05 6.55 L 3.15 5.0 L 0.05 5.0 L 4.6 9.7 L 12.05 0.1 L 9.2 0.1" width="15" height="15">        
+			<s:fill>
+				<!--- 
+				@private 
+				The solid color fill for the CheckBox's checkmark. The default alpha is .9, and the default fill color is 0x000000. 
+				-->
+				<s:SolidColor id="checkMarkFill" color="#00B32D" alpha="0.8" />
+			</s:fill>
+		</s:Path>
+		<s:Label text="Available" />
+	</s:HGroup>
+	
+	<s:DropDownList requireSelection="true" selectedIndex="0" width="150">
+		<s:dataProvider>
+			<s:ArrayList>
+				<fx:String>For 1 year - £10.99</fx:String>
+				<fx:String>For 2 year - £19.99</fx:String>
+				<fx:String>For 3 year - £27.99</fx:String>
+			</s:ArrayList>
+		</s:dataProvider>
+	</s:DropDownList>
+</s:ItemRenderer>

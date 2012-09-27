@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:swiz="http://swiz.swizframework.org" xmlns:config="cc.sitemaker.swiz.config.*" xmlns:view="cc.sitemaker.swiz.view.*">
+	<fx:Declarations>
+		<swiz:Swiz>
+			<swiz:beanProviders>
+				<config:Beans />
+			</swiz:beanProviders>
+			
+			<swiz:loggingTargets>
+				<swiz:SwizTraceTarget id="myTraceTarget" />
+			</swiz:loggingTargets>
+			
+			<swiz:config>
+				<swiz:SwizConfig  />
+			</swiz:config>			
+		</swiz:Swiz>
+	</fx:Declarations>
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle" />
+	</s:layout>
+	
+	<view:MainView />
+	
+	<mx:ModuleLoader id="appLoader" width="500" height="400" />
+</s:Application>

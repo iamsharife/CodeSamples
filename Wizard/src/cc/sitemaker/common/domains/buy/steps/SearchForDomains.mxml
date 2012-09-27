@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wizard:BaseWizardPage xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:wizard="cc.sitemaker.common.components.wizard.*"
+					   width="100%" height="100%"
+					   label="Search">
+	
+	<fx:Script>
+		<![CDATA[
+						
+			override public function isValid():Boolean{
+				txtDomains.errorString = "";
+				
+				if (txtDomains.text == ""){
+					txtDomains.errorString = "You must supply at least one domain.";
+					return false;
+				}
+				
+				return true;
+				
+			}
+			
+			
+		]]>
+	</fx:Script>
+	
+	
+	<fx:Declarations>
+		<s:ArrayList id="domainExtensions">
+			<fx:String>.com</fx:String>
+			<fx:String>.com</fx:String>
+			<fx:String>.com</fx:String>
+			<fx:String>.com</fx:String>
+			<fx:String>.info</fx:String>
+			<fx:String>.info</fx:String>
+			<fx:String>.info</fx:String>
+			<fx:String>.info</fx:String>
+			<fx:String>.co.uk</fx:String>
+			<fx:String>.co.uk</fx:String>
+			<fx:String>.co.uk</fx:String>
+			<fx:String>.co.uk</fx:String>
+		</s:ArrayList>
+	</fx:Declarations>
+	
+	<s:VGroup width="100%">
+		<s:HGroup width="100%">
+			<s:Label text="Enter your domain name(s)" />
+			<mx:Spacer width="100%" />
+			<s:Label text="You have 1 domain voucher to use" />
+		</s:HGroup>
+		
+		<s:TextArea id="txtDomains" width="100%" height="100%" />
+		
+		<s:Label text="Please enter one domain per line. You can search for up to 50 domains at a time." />
+		
+		<s:Label text="" />
+		
+		<s:Label text="Choose your domain extensions" />
+		
+		<s:DataGroup width="100%" dataProvider="{domainExtensions}" itemRenderer="cc.sitemaker.common.renderer.CheckBoxRenderer">
+			<s:layout>
+				<s:TileLayout requestedColumnCount="4" columnWidth="130" rowHeight="25" />
+			</s:layout>
+		</s:DataGroup>
+	</s:VGroup>
+	
+	
+	
+</wizard:BaseWizardPage>

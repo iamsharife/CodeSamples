@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+	
+	<fx:Script>
+		<![CDATA[
+			import cc.sitemaker.swiz.shell.model.presentation.ToolbarPresentationModel;
+			
+			[Bindable]
+			[Inject]
+			public var model:ToolbarPresentationModel;
+			
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:VGroup>		
+		<s:HGroup top="60">
+			<s:Button id="startAppButton" 		label="Start Application" click="model.onStartApp(event)" />
+			<s:Button id="loadModuleAButton"	label="Load Post Tags Module" click="model.onLoadA(event)" />
+			<s:Button id="loadModuleBButton"	label="Load Global Tags Module" click="model.onLoadB(event)" />
+		</s:HGroup>
+		<s:HGroup>
+			<s:Button id="resolveServiceButton"	label="Resolve Tags" click="model.onResolveTag(event)"/>
+			<s:Button id="removeModuleButton"	label="Remove a module" click="model.onRemoveButtton(event)" />
+			<s:Button id="loadDummModuleButton"	label="add simple module" click="model.onAddDummModule(event)" />
+		</s:HGroup>	
+	</s:VGroup>
+</s:Group>

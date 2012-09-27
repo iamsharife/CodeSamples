@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 xmlns="cc.sitemaker.common.flow.*" xmlns:actions="cc.sitemaker.domains.register.actions.*" xmlns:components="cc.sitemaker.common.components.*" xmlns:model="cc.sitemaker.domains.register.model.*">
+	<fx:Script>
+		<![CDATA[
+			import assets.skins.StepperSkin;
+			
+			import cc.sitemaker.common.flow.ActionEvent;
+			import cc.sitemaker.domains.register.views.DomainSearch;
+			import cc.sitemaker.domains.register.views.OrderView;
+			import cc.sitemaker.domains.register.views.SelectDomains;
+			import cc.sitemaker.domains.register.views.UserDetailsForm;
+		]]>
+	</fx:Script>	
+	
+	<fx:Declarations>
+		<model:RegisterModel id="model" />
+		
+		<fx:Object id="service" />
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import cc.sitemaker.common.flow.IState;
+			
+			private function getStateIndex(state:IState):int{
+				trace("getStateIndex = " + state )
+				var data:Array = stepper.dataProvider as Array;
+				
+				for (var i:int = 0; i < data.length; i++) {
+					var obj:Object = data[i] as Object;
+					if (obj.state == state)
+						return i;
+				}
+				
+				return stepper.selectedIndex;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout />
+	</s:layout>
+	
+	<Flow id="flow" currentFlowState="{domainSearch}" model="{model}">
+		<State id="domainSearch" view="{DomainSearch}">
+			<actions:SearchDomainAction actionId="search">
+				<Transition on="{ActionEvent.SUCCESS}" to="{selectDomains}" />
+			</actions:SearchDomainAction>
+		</State>
+		<State id="selectDomains" view="{SelectDomains}">
+			<Action actionId="proceed">				
+				<Transition on="{ActionEvent.SUCCESS}" to="{userDetailsForm}" />
+			</Action>
+		</State>
+		<State id="userDetailsForm" view="{UserDetailsForm}">
+			<Action actionId="proceed">				
+				<Transition on="{ActionEvent.SUCCESS}" to="{orderView}" />
+			</Action>			
+		</State>
+		<State id="orderView" view="{OrderView}">
+			
+		</State>
+	</Flow>
+	
+	<components:Stepper id="stepper" width="100%" selectedIndex="{getStateIndex(flow.currentFlowState)}" skinClass="assets.skins.StepperSkin">
+		<components:dataProvider>
+			<fx:Array>
+				<fx:Object label="Domain search" state="{domainSearch}" />
+				<fx:Object label="Pricing" state="{selectDomains}" />
+				<fx:Object label="Your details" state="{userDetailsForm}" />
+			</fx:Array>
+		</components:dataProvider>
+	</components:Stepper>
+	
+		
+	<s:Group id="viewContainer" width="100%" height="100%" creationComplete="flow.viewContainer = viewContainer"/>
+	
+</s:Group>

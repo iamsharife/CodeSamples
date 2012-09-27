@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mate:LocalEventMap xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 xmlns:mate="http://mate.asfusion.com/">
+	
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import mx.events.StateChangeEvent;
+			
+			import supportClasses.SMModule;
+			import supportClasses.events.SMModuleEvent;
+			import supportClasses.model.ViewVO;
+			import supportClasses.view.BaseView;
+			import supportClasses.view.ModuleMainView;
+			
+			private function getModule():SMModule{
+				return getDispatcher() as SMModule;
+			}
+			
+			private function logIt(message:String, target:String):void{
+				trace("SMModuleEventMap::logIt","::Target = " + target,"::Message = " + message);
+			}
+						
+			private function onViewChanging(e:SMModuleEvent):void{
+				var main:ModuleMainView = getModule().getMain();
+				var view:BaseView = (main.numElements > 0) ? main.getElementAt(0) as BaseView : null;
+				
+				if (view != null){
+					view.viewChangeRequested(e.newState, e.newModule);
+				} else {					
+					var smme:SMModuleEvent = new SMModuleEvent(SMModuleEvent.VIEW_CHANGE);
+					smme.newState = e.newState;
+					smme.newModule = e.newModule;
+					getDispatcher().dispatchEvent(smme);
+				}
+			} 
+			
+			private function onViewChange(e:SMModuleEvent):void{
+				trace("SMModuleEventMap::onViewChange","::e.target = ", e.target);
+				trace("SMModuleEventMap::onViewChange","::ViewRequest = ", e.newState, "::Module Requested = ", e.newModule);
+				getModule().getMain().currentState = e.newState;
+				getModule().updateMenuSelection(e.newState);
+				
+				if (e.newState == null){
+					// exit of module requested
+					var smme:SMModuleEvent = new SMModuleEvent(SMModuleEvent.EXIT_MODULE);
+					smme.newState = e.newState;
+					smme.newModule = e.newModule;
+					getDispatcher().dispatchEvent(smme);
+				}
+			} 
+			
+			private function onViewCancelChange(e:SMModuleEvent):void{
+				getModule().updateMenuSelection(getModule().getMain().currentState);
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		
+		<mate:Debugger level="{Debugger.ALL}" />
+		
+		<mate:EventHandlers type="{FlexEvent.INITIALIZE}">
+			<mate:InlineInvoker method="logIt" arguments="{['FlexEvent.INITIALIZE', event.target]}" />
+		</mate:EventHandlers>
+		
+		<mate:EventHandlers type="{FlexEvent.CREATION_COMPLETE}">
+			<mate:InlineInvoker method="logIt" arguments="{['FlexEvent.CREATION_COMPLETE', event.target]}" />
+		</mate:EventHandlers>
+		
+		<mate:EventHandlers type="{SMModuleEvent.VIEW_CHANGING}">
+			<!--<mate:InlineInvoker method="logIt" arguments="{['SMModuleEvent.VIEW_CHANGING', event.target]}" />-->
+			<mate:InlineInvoker method="onViewChanging" arguments="{[event]}" />
+		</mate:EventHandlers>
+		
+		<mate:EventHandlers type="{SMModuleEvent.VIEW_CHANGE}">
+			<!--<mate:InlineInvoker method="logIt" arguments="{['SMModuleEvent.VIEW_CHANGE', event.target]}" />-->
+			<mate:InlineInvoker method="onViewChange" arguments="{[event]}" />
+		</mate:EventHandlers>
+		
+		<mate:EventHandlers type="{SMModuleEvent.VIEW_CANCEL_CHANGE}">
+			<!--<mate:InlineInvoker method="logIt" arguments="{['SMModuleEvent.VIEW_CHANGE', event.target]}" />-->
+			<mate:InlineInvoker method="onViewCancelChange" arguments="{[event]}" />
+		</mate:EventHandlers>
+		
+	</fx:Declarations>
+	
+</mate:LocalEventMap>

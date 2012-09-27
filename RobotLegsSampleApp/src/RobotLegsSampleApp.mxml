@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:view="cc.sitemaker.robotlegs.shell.view.components.*"
+			   xmlns:loader="cc.sitemaker.robotlegs.common.*"			   
+			   preinitialize="preInitHandler(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import cc.sitemaker.robotlegs.common.FSMModularDemo;
+			import cc.sitemaker.robotlegs.shell.ShellContext;
+			
+			import com.flashdynamix.utils.SWFProfiler;
+			
+			import mx.events.FlexEvent;
+			import mx.events.ModuleEvent;
+			import mx.modules.ModuleLoader;
+			
+			import org.robotlegs.utilities.statemachine.StateEvent;
+			
+			public  var shellContext:ShellContext;
+			
+			
+			protected function preInitHandler(event:FlexEvent):void
+			{
+				shellContext = new ShellContext (this);
+				this.addEventListener(FlexEvent.APPLICATION_COMPLETE, init)
+			}
+			
+			private function init (e:FlexEvent):void{
+				SWFProfiler.init(stage, this)
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle" />
+	</s:layout>
+	
+	<loader:CacheModuleLoader id="appLoader" width="600" height="500" />
+		
+</s:Application>

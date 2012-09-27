@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- This is an auto generated file and is not intended for modification. -->
+
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:flexui="flexunit.flexui.*"
+			   minWidth="955" minHeight="600" creationComplete="onCreationComplete()">
+	<fx:Script>
+		<![CDATA[
+			import flexUnitTests.UploadManagerTest;
+			import flexUnitTests.UploadTestSuite;
+			
+			private var _fileRef:FileReference;
+			
+			public function currentRunTestSuite():Array
+			{
+				var testsToRun:Array = new Array();
+				var ts:UploadManagerTest = new UploadManagerTest();
+				ts.fileRef = _fileRef;
+				testsToRun.push(ts);
+				return testsToRun;
+			}
+			
+			
+			private function onCreationComplete():void
+			{
+			}
+			
+			protected function button1_clickHandler(event:MouseEvent):void {
+				_fileRef = new FileReference();
+				_fileRef.browse();
+				_fileRef.addEventListener(Event.SELECT, onSelect);
+			}
+			
+			protected function onSelect(event:Event):void {
+				testRunner.runWithFlexUnit4Runner(currentRunTestSuite(), "UploadTestRunner");
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:layout>
+		<s:VerticalLayout />
+	</s:layout>
+	<s:Button label="Upload" click="button1_clickHandler(event)" />
+	<flexui:FlexUnitTestRunnerUI id="testRunner">
+	</flexui:FlexUnitTestRunnerUI>
+</s:Application>

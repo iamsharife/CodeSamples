@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<views:AbstractRegisterView xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				xmlns:flow="cc.sitemaker.common.flow.*"
+				width="100%" height="100%"
+				implements="cc.sitemaker.common.flow.IStateView" 
+				xmlns:views="cc.sitemaker.domains.register.views.*">
+	
+	<fx:Script>
+		<![CDATA[
+			import cc.sitemaker.common.flow.IStateView;
+			import cc.sitemaker.domains.components.CheckboxRenderer;
+			import cc.sitemaker.domains.register.model.RegisterModel;
+			
+			import mx.events.FlexEvent;
+			
+			import spark.components.CheckBox;
+			import spark.events.RendererExistenceEvent;
+			
+			private function getChosenExtensions():Array{
+				var chosenExtensions:Array = new Array();
+				for (var i:int = 0; i<extensionGroup.numChildren - 1; i++){
+					var cbR:CheckboxRenderer = extensionGroup.getElementAt(i) as CheckboxRenderer;
+					if (cbR.checkBox.selected){
+						chosenExtensions.push(cbR.checkBox.label);
+					}
+				}
+				return chosenExtensions;
+			}
+
+			override protected function performAction(key:String):void{
+				spExtensions.value = getChosenExtensions();
+				super.performAction(key);
+			}			
+
+			protected function addCheckBoxEvent(event:RendererExistenceEvent):void	{
+				// TODO Auto-generated method stub
+				var renderer:CheckboxRenderer = event.renderer as CheckboxRenderer;
+				renderer.addEventListener('checkboxChange', onToggleCheckBox);
+			}
+			
+			private function onToggleCheckBox(event:Event):void{
+				var checkBox:CheckBox = (event.target as CheckboxRenderer).checkBox;
+				var allCheckBox:CheckBox = (extensionGroup.getElementAt(extensionGroup.numChildren - 1) as CheckboxRenderer).checkBox;
+				
+				// deal with the ALL checkbox seperately
+				if (checkBox == allCheckBox){
+					onSelectALLChange(event);
+				}
+				else{
+					// Select ALL checkbox if clicking this checkbox made all extensions selected
+					if (getChosenExtensions().length == domainExtensions.length - 1){
+						allCheckBox.selected = true; 
+					}
+					else{
+						allCheckBox.selected = false;
+						if (getChosenExtensions().length == 0){
+							// user is not allowed to have no checkboxes unselected. Select .com by default
+							(extensionGroup.getElementAt(0) as CheckboxRenderer).checkBox.selected = true;
+						}
+					}
+				}
+			}
+				
+			private function onSelectALLChange(event:Event):void{
+				var selected:Boolean = (event.target as CheckboxRenderer).checkBox.selected; 
+				// Mark all checkboxes if user ticks ALL
+				if (selected){
+					for (var i:int = 0; i<extensionGroup.numChildren; i++){
+						(extensionGroup.getElementAt(i) as CheckboxRenderer).checkBox.selected = true;  
+					}
+				}
+				else{
+					// un-mark all but, leave .com selected
+					for (var i:int = 1; i<extensionGroup.numChildren; i++){
+						(extensionGroup.getElementAt(i) as CheckboxRenderer).checkBox.selected = false;  
+					}
+				}
+			}
+		]]>
+	</fx:Script>
+	
+	
+	<views:stateProperties>
+		<flow:StateProperty id="spDomains" key="domains" value="{domains.text}"/>
+		<flow:StateProperty id="spExtensions" key="extensions"/>
+	</views:stateProperties>
+	
+	<fx:Declarations>
+		<s:ArrayList id="domainExtensions">
+			<fx:String>.com</fx:String>
+			<fx:String>.name</fx:String>
+			<fx:String>.be</fx:String>
+			<fx:String>.net</fx:String>
+			<fx:String>.us</fx:String>
+			<fx:String>.eu</fx:String>
+			<fx:String>.co.uk</fx:String>
+			<fx:String>.org</fx:String>
+			<fx:String>.biz</fx:String>
+			<fx:String>.org.uk</fx:String>
+			<fx:String>ALL</fx:String>
+		</s:ArrayList>
+	</fx:Declarations>
+	
+	<s:VGroup width="100%">
+		<s:HGroup width="100%">
+			<s:Label text="Enter your domain name(s)" />
+		</s:HGroup>
+		
+		<s:TextArea id="domains" width="100%" height="100%" errorString="{spDomains.error}" />
+		
+		<s:Label text="Please enter one domain per line. You can search for up to 50 domains at a time." />
+		
+		<s:Label text="" />
+		
+		<s:Label text="Choose your domain extensions" />
+		
+		<s:DataGroup id="extensionGroup" width="100%" dataProvider="{domainExtensions}" rendererAdd="addCheckBoxEvent(event)" itemRenderer="cc.sitemaker.domains.components.CheckboxRenderer">
+			<s:layout>
+				<s:TileLayout requestedColumnCount="4" columnWidth="130" rowHeight="25" />
+			</s:layout>
+		</s:DataGroup>
+		
+		<s:Line width="100%">
+			<s:stroke>
+				<s:SolidColorStroke color="#CCCCCC" />
+			</s:stroke>
+		</s:Line>
+		<s:HGroup horizontalAlign="right" width="100%">
+			<s:Button label="Next" click="performAction('search')"/>
+		</s:HGroup>
+	</s:VGroup>
+	
+	
+</views:AbstractRegisterView>

@@ -1,0 +1,13 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace view "supportClasses.view.*";
+@namespace components "supportClasses.components.*";
+
+view|ModuleMainView {	
+	skin-class:ClassReference("supportClasses.skins.ModuleMainSkin");
+}
+
+components|SMModuleMenu {
+	skin-class:ClassReference("supportClasses.skins.moduleMenu.ModuleMenuSkin");
+}

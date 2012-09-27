@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 xmlns:views="cc.sitemaker.swiz.shell.views.*" xmlns:common="cc.sitemaker.swiz.common.*">
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import cc.sitemaker.swiz.shell.events.ModuleManagementEvent;
+			import cc.sitemaker.swiz.shell.model.presentation.MainViewPresentationModel;
+			
+			/* Makes use of the presentation model pattern, as per Swiz Best Practices  
+			 * This class has the View Logic, Notice that this has also has [Inject]
+			 * This dependancy will be injected, if it has not been instatiated , 
+			 * it will be for the first time
+			*/
+			[Bindable]
+			[Inject]
+			public var model:MainViewPresentationModel;
+			
+			/* Application Domain is defined on postConstruct, so that it can be
+			 * passed into the module loader when a module is loaded
+			 * it is also cleared down for Garbage Collection
+			*/
+			public var appDomain:ApplicationDomain;
+			
+			[PostConstruct]
+			public function setApplicationDomain():void{
+				appDomain = new ApplicationDomain(ApplicationDomain.currentDomain);
+			}
+			
+			/* [EventHandler] Meta tag is used to remove boilerplate code
+			 * so this replaces addEventListeners, also this caught at the Swiz Context level
+			 * [EventHandler] can also have a scope attribute, allowing you to listen for 
+			 * local or global events. Default for this is global.
+			*/
+			[EventHandler( event="ModuleManagementEvent.LOAD_MODULE")]
+			public function loadModule(e:ModuleManagementEvent):void{
+				if (appLoader.url != e.moduleUrl) {
+					appLoader.applicationDomain = null;
+					appLoader.unloadModule();
+					appLoader.url = null;
+					System.gc();
+					appLoader.applicationDomain = appDomain;
+					appLoader.loadModule(e.moduleUrl);
+				}
+			}
+			
+			[EventHandler( event="ModuleManagementEvent.UNLOAD_MODULE")]
+			public function unloadModule(e:ModuleManagementEvent):void{		
+				appLoader.applicationDomain = null;	
+				appLoader.unloadModule();
+				appLoader.url = null;
+				System.gc();
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<views:ToolBar />
+	
+	<!-- CacheModuleLoader: Build on the Flex Default Module Loader, 
+	has added caching and module disposal methods
+	-->
+	<common:CacheModuleLoader id="appLoader" width="600" height="500" />
+	
+</s:Group>

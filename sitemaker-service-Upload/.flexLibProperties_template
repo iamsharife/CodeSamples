@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="cc.sitemaker.upload.UploadState"/>
+    <classEntry path="cc.sitemaker.upload.events.UploadManagerEvent"/>
+    <classEntry path="cc.sitemaker.upload.events.UploadServiceEvent"/>
+    <classEntry path="cc.sitemaker.upload.manager.UploadManager"/>
+    <classEntry path="cc.sitemaker.upload.model.UploadModel"/>
+    <classEntry path="cc.sitemaker.upload.model.vo.UploadVO"/>
+    <classEntry path="cc.sitemaker.upload.service.UploadService"/>
+    <classEntry path="cc.sitemaker.upload.interfaces.IUploadParent"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

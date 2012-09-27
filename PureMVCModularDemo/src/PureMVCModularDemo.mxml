@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   xmlns:loader="cc.sitemaker.mvcmodular.shell.*" 
+			   applicationComplete="init()" viewSourceURL="srcview/index.html">
+
+	<fx:Script>
+		<![CDATA[
+			import cc.sitemaker.mvcmodular.shell.ModularFacade;
+			
+			import com.flashdynamix.utils.SWFProfiler;
+			private var pmvcFacade  : ModularFacade = ModularFacade.getInstance(ModularFacade.NAME);
+			private function init  (): void{
+				pmvcFacade.startup(this);
+				SWFProfiler.init(stage, this);
+			}
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle" />
+	</s:layout>
+	<loader:CacheModuleLoader id="appLoader"  width="600" height="500">
+		
+	</loader:CacheModuleLoader>
+</s:Application>

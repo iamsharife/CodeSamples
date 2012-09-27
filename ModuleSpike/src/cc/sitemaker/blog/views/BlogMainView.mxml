@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:ModuleMainView xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					 xmlns:s="library://ns.adobe.com/flex/spark" 
+					xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:view="supportClasses.view.*" width="100%" height="100%" xmlns:views="cc.sitemaker.blog.views.*">
+	
+	<fx:Script>
+		<![CDATA[
+			import supportClasses.events.SMModuleEvent;
+						
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				var smme:SMModuleEvent = new SMModuleEvent(SMModuleEvent.VIEW_CHANGING);		
+				smme.newState = "settings";
+				smme.oldState = currentState;
+				dispatchEvent(smme);
+			}
+			
+			
+			protected function button2_clickHandler(event:MouseEvent):void
+			{
+				var smme:SMModuleEvent = new SMModuleEvent(SMModuleEvent.VIEW_CHANGING);				
+				smme.newState = "postView";
+				smme.oldState = currentState;
+				dispatchEvent(smme);
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<view:states>
+		<s:State name="base" />
+		<s:State name="postView" />
+		<s:State name="dashboard" />
+		<s:State name="posts" />
+		<s:State name="comments" />
+		<s:State name="settings" />
+	</view:states>
+	
+	<views:PostView includeIn="postView" />
+	<view:BaseView includeIn="dashboard">
+		<s:Label fontSize="24" text="Dashboard" />
+		<s:Button label="go to settings" click="button1_clickHandler(event)" />
+	</view:BaseView>
+	<view:BaseView includeIn="posts">
+		<s:Label fontSize="24" text="Posts" />
+		<s:Button label="go to base" click="button2_clickHandler(event)" />
+	</view:BaseView>
+	<view:BaseView includeIn="comments">
+		<s:Label fontSize="24" text="Comments" />
+	</view:BaseView>
+	<view:BaseView includeIn="settings">
+		<s:Label fontSize="24" text="Settings" />
+	</view:BaseView>
+</view:ModuleMainView>

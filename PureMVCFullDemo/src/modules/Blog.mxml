@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark" 
+		   xmlns:mx="library://ns.adobe.com/flex/mx" 
+		   layout="absolute" 
+		   initialize="initializeHandler(event)"
+		   implements="cc.sitemaker.puremvc.common.ISMModule"
+		   width="100%" height="100%">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import cc.sitemaker.puremvc.blog.BlogFacade;
+			
+			import mx.events.FlexEvent;
+			
+			import org.puremvc.as3.multicore.interfaces.IFacade;
+			import org.puremvc.as3.multicore.patterns.facade.Facade;
+			
+			protected var facade:IFacade;
+
+			public static const NAME:String = "BlogModule";    
+
+			protected function initializeHandler(event:FlexEvent):void
+			{
+				facade = BlogFacade.getInstance( NAME );       
+				BlogFacade(facade).startup( this );
+			}
+			
+			public function dispose():void{
+				Facade.removeCore( NAME );
+			}
+
+		]]>
+	</fx:Script>
+	
+	<s:Label id="lbl" text="Hello i am blog!" />
+	
+</mx:Module>

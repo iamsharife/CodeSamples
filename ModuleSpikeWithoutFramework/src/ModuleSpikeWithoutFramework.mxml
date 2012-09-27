@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" backgroundColor="0x999999"
+			   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:map="map.*" 
+			   xmlns:toolbar="cc.sitemaker.toolbar.*"
+			   xmlns:supportClasses="supportClasses.*"
+			   creationComplete="onCreationComplete(event)">
+	
+	<fx:Script>
+		<![CDATA[			
+			import mx.events.FlexEvent;
+			import mx.events.ModuleEvent;
+			
+			import supportClasses.AppContainerHelper;
+			import supportClasses.events.SMModuleEvent;
+			
+			private var _appContainerHelper:AppContainerHelper;
+			
+			private function loadBlog():void{
+				//appLoader.url = "module/Blog.swf";
+				var smme:SMModuleEvent = new SMModuleEvent(SMModuleEvent.LOAD_MODULE);
+				smme.newState = "dashboard";
+				smme.oldModule = appLoader.url;
+				smme.newModule = "module/Blog.swf";
+				dispatchEvent(smme);
+			}		
+			
+			private function loadServices():void{
+				//appLoader.url = "module/Services.swf";
+				var smme:SMModuleEvent = new SMModuleEvent(SMModuleEvent.LOAD_MODULE);
+				smme.newState = "";
+				smme.oldModule = appLoader.url;
+				smme.newModule = "module/Services.swf";
+				dispatchEvent(smme);
+			}
+			
+			
+			protected function appLoader_progressHandler(event:ModuleEvent):void{
+				appProgress.setProgress(event.bytesLoaded, event.bytesTotal);
+			}
+			
+			
+			protected function appLoader_readyHandler(event:ModuleEvent):void{
+				
+			}
+			
+			
+			private function onUnloadModule(e:ModuleEvent):void{
+				try
+				{
+					new LocalConnection().connect("anything");
+					new LocalConnection().connect("anything");
+				}
+				catch (e:*) {}
+				trace("AppContainerEventMap::onUnloadModule");
+			}			
+
+			protected function onCreationComplete(event:FlexEvent):void
+			{
+				_appContainerHelper = new AppContainerHelper(this);
+			}
+
+		]]>
+	</fx:Script>
+	
+	<fx:Style source="./assets/style.css" />
+		
+	<s:VGroup paddingTop="10" horizontalAlign="center" width="100%" height="100%">
+		<s:HGroup>
+			<s:Button label="Services" height="100" width="100" click="loadServices()"/>
+			<s:Button label="Blog" height="100" width="100" click="loadBlog()"/>
+		</s:HGroup>
+		
+		<s:Group width="100%" height="100%">
+			<s:Rect top="0" left="0" right="0" bottom="0">
+				<s:stroke>
+					<s:SolidColorStroke color="#CCCCCC" />
+				</s:stroke>
+			</s:Rect>
+			
+			<toolbar:SubAppLoadingBar
+				id="appProgress"
+				horizontalCenter="0"
+				top="10"
+				/>
+			<!--<mx:ModuleLoader id="appLoader" width="100%" height="100%" 
+			progress="appLoader_progressHandler(event)"
+			ready="appLoader_readyHandler(event)"
+			unload="onUnloadModule(event)"/>-->
+			<supportClasses:CachedModuleLoader id="appLoader" width="100%" height="100%" 
+											   progress="appLoader_progressHandler(event)"
+											   ready="appLoader_readyHandler(event)"
+											   unload="onUnloadModule(event)"/>
+		</s:Group>
+		
+	</s:VGroup>
+	
+	
+</s:Application>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="false" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="cc.sitemaker.utilities.instructions.IInstructionTarget"/>
+    <classEntry path="cc.sitemaker.utilities.instructions.events.InstructionEvent"/>
+    <classEntry path="cc.sitemaker.utilities.instructions.model.vo.Instruction"/>
+    <classEntry path="cc.sitemaker.utilities.instructions.model.InstructionProxy"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

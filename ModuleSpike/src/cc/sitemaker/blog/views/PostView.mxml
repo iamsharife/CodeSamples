@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:BaseView xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:view="supportClasses.view.*" width="100%" height="100%">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.CloseEvent;
+			
+			import supportClasses.events.SMModuleEvent;
+			import supportClasses.model.ViewVO;
+									
+			override public function viewChangeRequested(intendedState:String, newModule:String = null):void{
+				viewRequested = intendedState;
+				moduleRequested = newModule;
+				if (dirty.selected){
+					Alert.show("Your post is dirty, discard?", "Save post?", Alert.YES|Alert.NO, this, closeHandler);
+				} else {
+					super.viewChangeRequested(intendedState,newModule);
+				}
+			}
+			
+			private function closeHandler(e:CloseEvent):void{
+				if (e.detail == Alert.YES){		
+					dirty.selected = false;
+					super.viewChangeRequested(viewRequested,moduleRequested);
+				} else {
+					super.preventViewChange();
+				}
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<view:layout>
+		<s:VerticalLayout />
+	</view:layout>
+	
+	<view:states>
+		<s:State name="base" />
+		<s:State name="another" />
+		<s:State name="again" />
+	</view:states>
+	
+	<s:Label text="base state of post view" 
+			 text.another="another state of post view"
+			 text.again="again another state of post view" fontSize="36"/>	
+	
+	<s:CheckBox id="dirty" label="is it dirty?" />
+	
+	
+</view:BaseView>

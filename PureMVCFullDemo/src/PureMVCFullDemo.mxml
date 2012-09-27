@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600"
+			   applicationComplete="init()"
+			   >
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import cc.sitemaker.puremvc.shell.DemoFacade;
+			import cc.sitemaker.puremvc.shell.events.SMModuleEvent;
+			
+			private var pmvcFacade  : DemoFacade = DemoFacade.getInstance(DemoFacade.NAME);
+			private function init () :void{
+				pmvcFacade.startup(this);
+			}
+			
+			private function loadBlog():void{
+				var sme:SMModuleEvent = new SMModuleEvent(SMModuleEvent.LOAD_MODULE);
+				sme.moduleUrl = "modules/Blog.swf";
+				dispatchEvent(sme);
+			}
+			
+			private function unloadModule():void{
+				var sme:SMModuleEvent = new SMModuleEvent(SMModuleEvent.UNLOAD_MODULE);
+				dispatchEvent(sme);
+			}
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout />
+	</s:layout>
+	
+	<s:HGroup>
+		<s:Button label="Load Blog" click="loadBlog()" />
+		<s:Button label="Unload Module" click="unloadModule()" />
+	</s:HGroup>
+	<mx:ModuleLoader id="appLoader"  width="500" height="500"/>
+	
+</s:Application>

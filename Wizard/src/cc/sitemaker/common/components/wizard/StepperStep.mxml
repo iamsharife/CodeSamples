@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  paddingTop="5" 
+		  paddingLeft="5" 
+		  paddingRight="5" 
+		  paddingBottom="5"
+		  width="100%" horizontalAlign="center" verticalAlign="middle">
+	
+	<fx:Declarations>
+		<fx:String id="label" />
+		<fx:Number id="index" />
+	</fx:Declarations>
+	
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="inprogress" />
+		<s:State name="done" />
+	</s:states>
+	
+	<s:Group>
+		
+		<s:Ellipse width="50" height="50">
+			<s:stroke>
+				<s:SolidColorStroke color.normal="#CCCCCC"
+									color.inprogress="#0099CC"
+									color.done="#99CC00" weight="4" />
+			</s:stroke>
+			<s:fill>
+				<s:SolidColor color="#FFFFFF"/>
+			</s:fill>
+		</s:Ellipse>
+		
+		<s:Label text="{index+1}" color="#CCCCCC" verticalCenter="0" horizontalCenter="-1" fontSize="16"
+				 color.normal="#CCCCCC"
+				 color.inprogress="#0099CC"
+				 color.done="#99CC00" />
+		
+	</s:Group>
+	
+	<s:Label id="labelDisplay" 
+			 text="{label}" 
+			 horizontalCenter="0" 
+			 verticalCenter="0" 
+			 color.normal="#CCCCCC"
+			 color.inprogress="#0099CC"
+			 color.done="#99CC00"/>
+	
+</s:VGroup>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+
+	<s:VGroup>
+		<s:Label id="title" text="hello PMVC Modular Demo 2"/>	
+		<s:HGroup>
+			<s:Button id="startAppButton" 		label="Start Application" />
+			<s:Button id="loadModuleAButton"	label="Load Post Tags Module" />
+			<s:Button id="loadModuleBButton"	label="Load Global Tags Module" />
+		</s:HGroup>
+		<s:HGroup>
+			<s:Button id="resolveServiceButton"	label="Resolve Tags" />
+			<s:Button id="removeModuleButton"	label="Remove a module" />
+			<s:Button id="loadDummModuleButton"	label="add simple module" />
+		</s:HGroup>	
+	</s:VGroup>
+</s:Group>

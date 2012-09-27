@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%">
+
+	<fx:Script>
+		<![CDATA[
+			import mx.binding.utils.BindingUtils;
+						
+			
+			public function initBinding  () : void {
+				//BindingUtils.bindProperty(lstGlobalTags,"dataProvider", this,"globalTags", false, true);
+				//BindingUtils.bindProperty(lstPostTags,"dataProvider", this,"postTags", false, true);
+			}
+			
+			public function removeBinding  () : void {
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<s:ArrayList id="postTags" />
+		<s:ArrayList id="globalTags" />
+	</fx:Declarations>
+	
+	<s:Label id="lbl" text="Post Tags" fontSize="24" />
+	
+	<s:List id="lstGlobalTags" width="100%" labelField="name" />
+	<s:Button id="btnAddToPost" label="Add to post" />
+	<s:List id="lstPostTags" width="100%"  labelField="name"/>
+	
+	
+</s:VGroup>

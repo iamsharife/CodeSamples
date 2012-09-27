@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600"
+			   xmlns:view="cc.sitemaker.robotlegs.shell.view.components.*"
+			   preinitialize="preInitHandler(event)"
+			   >
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import cc.sitemaker.robotlegs.common.FSMModularDemo;
+			import cc.sitemaker.robotlegs.shell.ShellContext;
+			
+			import mx.events.FlexEvent;
+			import mx.events.ModuleEvent;
+			import mx.modules.ModuleLoader;
+			
+			import org.robotlegs.utilities.statemachine.StateEvent;
+			
+			public  var shellContext:ShellContext;
+			
+			public var moduleLoader : ModuleLoader;
+			
+			protected function preInitHandler(event:FlexEvent):void
+			{
+				shellContext = new ShellContext (this);
+				moduleLoader  = new ModuleLoader ();
+			}
+			
+	
+		]]>
+	</fx:Script>
+	
+
+	<!--<view:MainScreen id="mainScreen" />-->
+	
+</s:Application>

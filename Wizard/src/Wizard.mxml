@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   xmlns:wizard="cc.sitemaker.common.components.wizard.*" xmlns:steps="cc.sitemaker.common.domains.buy.steps.*">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Style>
+		@namespace s "library://ns.adobe.com/flex/spark";
+		@namespace mx "library://ns.adobe.com/flex/mx";
+		@namespace wizard "cc.sitemaker.common.components.wizard.*";
+		
+		.WizardTabBar {
+			tabStyleName: "WizardTabs";
+			firstTabStyleName: "WizardTabs";
+			lastTabStyleName: "WizardTabs"; 
+			selectedTabTextStyleName: "mySelectedTabs";
+		}
+		
+		.WizardTabs {
+			cornerRadius: 0;
+			fillAlphas: 1, 1, 1 ,1;
+			fillColors: #a60026, #e0190e, #e0190e, #a60026;
+			backgroundAlpha: 1;   
+			backgroundColor: #84b000;   
+			color: #336699;
+			font-size: 16px;
+			disabled-color: #CCCCCC;
+			
+		}
+		
+		.WizardTabGreenColor {
+			cornerRadius: 0;
+			fillAlphas: 1, 1, 1 ,1;
+			fillColors: #557800, #84b000, #b0f002, #b0f002;
+			backgroundAlpha: 1;   
+			backgroundColor: #84b000;   
+			color: #336699;
+			font-size: 16px;
+			disabled-color: #CCCCCC;			
+		}
+
+		
+	</fx:Style>
+	
+	
+	<wizard:Wizard id="sampleWizard"
+				   width="800"
+				   minHeight="450"
+				   verticalCenter="0"
+				   horizontalCenter="0">
+		<wizard:pages>
+			<steps:SearchForDomains />
+			<steps:SelectDomains />
+			<steps:YourOrder />
+			<wizard:BaseWizardPage label="Review" />
+		</wizard:pages>
+	</wizard:Wizard>
+	
+	
+</s:Application>

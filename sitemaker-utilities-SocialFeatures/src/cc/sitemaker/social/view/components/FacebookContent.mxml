@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<supportClasses:SocialNavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009" 
+									   xmlns:s="library://ns.adobe.com/flex/spark" 
+									   xmlns:mx="library://ns.adobe.com/flex/mx"
+									   xmlns:supportClasses="cc.sitemaker.social.view.components.supportClasses.*" 
+									   icon="{SocialIcons.FACEBOOK_ICON_20}">
+	
+	<fx:Script>
+		<![CDATA[
+			import assets.SocialIcons;
+		]]>
+	</fx:Script>
+	
+	<s:HGroup width="100%" height="100%" gap="-1">
+		<s:BorderContainer width="168" height="100%" borderColor="0xCCCCCC" backgroundColor="0xF1F1F1">
+			<s:layout>
+				<s:VerticalLayout paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10" />
+			</s:layout>
+			<supportClasses:FacebookSessionState id="fbSessionState" />
+		</s:BorderContainer>
+		<s:SkinnableContainer id="socialContent" width="100%" height="100%" enabled="{selected}"
+							  skinClass="cc.sitemaker.social.view.components.skin.SocialProfileContainer">
+			<s:VGroup paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10" width="100%" height="100%">
+				<s:Label text="Message:"  styleName="titleMediumBold"/> 
+				<s:TextArea id="messageArea" width="100%" heightInLines="4"
+							text="Check out my new product"
+							styleName="titleMediumBold"
+							focusThickness="0"/>
+				<s:HGroup width="100%" height="100%" paddingLeft="0" gap="10">
+					<mx:Image id="socialImg"
+							  maxHeight="85" maxWidth="120" 
+							  horizontalAlign="center" verticalAlign="top"
+							  verticalCenter="0" horizontalCenter="0" 
+							  maintainAspectRatio="true" />
+					<s:VGroup width="100%" height="100%">
+						<s:Label id="lblName" width="100%" text="Apple IPad 2"  styleName="titleMediumBold"/>
+						<s:Label id="lblCaption" width="100%" text="£400.00 inc vat" color="0x808080" />
+						<s:Label id="lblDesc" width="100%" height="100%" maxDisplayedLines="4" color="0x808080" />
+					</s:VGroup>
+				</s:HGroup>
+			</s:VGroup>
+			<s:CheckBox id="showBuyNowChk" label="Show 'Buy now' link" selected="true" top="{socialImg.contentHeight}" bottom="10" left="10"/>
+		</s:SkinnableContainer>
+	</s:HGroup>
+</supportClasses:SocialNavigatorContent>

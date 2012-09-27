@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Label id="title" text="hello RobotLegs Modular Demo">
+		
+	</s:Label>
+	<s:HGroup top="60">
+		<s:Button id="startAppButton" 		label="Start Application" />
+		<s:Button id="loadModuleAButton"	label="Load Blog Module" />
+		<s:Button id="loadModuleBButton"	label="Load Sercice Module" />
+		<s:Button id="loadModuleCDButton" 	label="Load Module C and D" />
+	</s:HGroup>
+</s:Group>

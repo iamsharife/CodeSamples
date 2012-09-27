@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<supportClasses:SMModule xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						 xmlns:s="library://ns.adobe.com/flex/spark" 
+						 xmlns:mx="library://ns.adobe.com/flex/mx" 
+						 xmlns:supportClasses="supportClasses.*" xmlns:view="supportClasses.view.*">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayList;
+			
+			override public function get views():ArrayList{
+				return new ArrayList();
+			}			
+			
+			override public function getMain():ModuleMainView{
+				return main;
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<view:ModuleMainView id="main">
+		<view:BaseView>
+			<s:Label text="Services WOHOO!" fontSize="36" />			
+		</view:BaseView>
+	</view:ModuleMainView>						
+				
+</supportClasses:SMModule>

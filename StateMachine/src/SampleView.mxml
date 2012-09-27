@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="400" height="300"
+		 currentState="{model.errorList.length == 0 ? '' : 'nameTaken'}">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<fx:Model id="model"/>
+		<fx:Object id="values">
+			<username>{username.text}</username>
+			<domain>{domain.text}</domain>
+		</fx:Object>
+		<<fx:Script>
+			<![CDATA[
+			]]>
+		</fx:Script>
+	</fx:Declarations>
+	
+	<s:states>
+		<s:State name="base" />
+		<s:State name="nameTaken"/>
+	</s:states>
+	
+	<s:Label name="This domain name is not available" includeIn="nameTaken"/>
+	<s:TextInput id="domain" text={model.do}/>
+	
+	<s:Group>
+		<s:TextInput id="username" />
+	</s:Group>
+	
+	<s:Button click="{perform('search')}" label="Search"/>
+	
+</s:Group>

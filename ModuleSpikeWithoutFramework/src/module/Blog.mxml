@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<supportClasses:SMModule xmlns:fx="http://ns.adobe.com/mxml/2009" 
+						 xmlns:s="library://ns.adobe.com/flex/spark" 
+						 xmlns:mx="library://ns.adobe.com/flex/mx" 
+						 xmlns:supportClasses="supportClasses.*" xmlns:view="supportClasses.view.*" xmlns:views="cc.sitemaker.blog.views.*" xmlns:model="supportClasses.model.*" xmlns:blog="cc.sitemaker.blog.*">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayList;
+			import mx.events.StateChangeEvent;
+			
+			import supportClasses.events.SMModuleEvent;
+			import supportClasses.model.ModuleViewVO;
+			import supportClasses.view.ModuleMainView;
+			
+			override public function getMain():ModuleMainView{
+				return main;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<supportClasses:views>
+		<s:ArrayList>
+			<model:ModuleViewVO view="postView" showInMenu="false"/>
+			<model:ModuleViewVO view="dashboard" label="Dashboard" />
+			<model:ModuleViewVO view="posts" label="Posts" />
+			<model:ModuleViewVO view="comments" label="Comments" />
+			<model:ModuleViewVO view="settings" label="Settings" />
+		</s:ArrayList>
+	</supportClasses:views>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+		
+	<blog:BlogMainView id="main" />	
+				
+</supportClasses:SMModule>

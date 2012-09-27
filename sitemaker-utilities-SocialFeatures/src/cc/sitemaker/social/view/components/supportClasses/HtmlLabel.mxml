@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:RichEditableText xmlns:fx="http://ns.adobe.com/mxml/2009"
+					xmlns:s="library://ns.adobe.com/flex/spark"
+					xmlns:mx="library://ns.adobe.com/flex/mx"
+					focusEnabled="false"
+					selectable="false"
+					editable="false" 
+					height="100%" heightInLines="1" 
+					verticalAlign="middle">
+	
+	<fx:Script>
+		<![CDATA[
+			import cc.sitemaker.social.event.HTMLLabelEvent;
+			
+			import flashx.textLayout.conversion.TextConverter;
+			import flashx.textLayout.elements.Configuration;
+			import flashx.textLayout.elements.FlowElement;
+			import flashx.textLayout.elements.FlowGroupElement;
+			import flashx.textLayout.elements.FlowLeafElement;
+			import flashx.textLayout.elements.LinkElement;
+			import flashx.textLayout.elements.TextFlow;
+			import flashx.textLayout.events.FlowElementMouseEvent;
+			import flashx.textLayout.formats.TextLayoutFormat;
+			
+			private var _newTf:TextFlow;
+			
+			override public function set text(value:String):void {
+				if (value == ""){
+					return;
+				}
+				
+				super.textFlow = TextConverter.importToFlow(value, TextConverter.TEXT_FIELD_HTML_FORMAT);
+				
+				addListenerToAllLinks();
+				
+				width = NaN;
+				
+				invalidateProperties();
+				invalidateSize();
+				invalidateDisplayList();
+			}
+			
+			private function addListenerToAllLinks():void{
+				var element:FlowLeafElement = textFlow.getFirstLeaf();
+				while(element != null){
+					var parent:LinkElement = element.getParentByType(LinkElement) as LinkElement;
+					if (parent != null){
+						parent.addEventListener(FlowElementMouseEvent.CLICK, linkClickedHandler, false, 0, true);
+						var normalFmt:TextLayoutFormat = new TextLayoutFormat(TextFlow.defaultConfiguration.defaultLinkNormalFormat);
+						normalFmt.color = 0xFFFFFF;
+						parent.linkActiveFormat = parent.linkNormalFormat = parent.linkHoverFormat = normalFmt;
+					}
+					element = element.getNextLeaf();
+				}
+				
+			}
+			
+			protected function linkClickedHandler(evt:FlowElementMouseEvent):void {
+				var linkEl:LinkElement = evt.flowElement as LinkElement;
+				
+				var hle:HTMLLabelEvent = new HTMLLabelEvent(HTMLLabelEvent.LINK_CLICKED);
+				hle.eventRequested = linkEl.href;
+				dispatchEvent(hle);
+				
+				evt.stopImmediatePropagation();
+				evt.preventDefault();
+			}
+		]]>
+	</fx:Script>
+	
+	
+</s:RichEditableText>

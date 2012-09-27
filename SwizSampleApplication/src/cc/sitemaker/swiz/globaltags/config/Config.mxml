@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<swiz:Swiz xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:swiz="http://swiz.swizframework.org" 
+		   xmlns:config="cc.sitemaker.swiz.globaltags.config.*">
+	
+	<swiz:beanProviders>
+		<config:Beans />
+	</swiz:beanProviders>
+	
+	<swiz:loggingTargets>
+		<swiz:SwizTraceTarget id="myTraceTarget" />
+	</swiz:loggingTargets>
+	
+	<swiz:config>
+		<!-- The eventPackages value tells Swiz the path to your Event classes,
+		and viewPackages is an optional value that speeds up the processing of display classes. -->
+		<swiz:SwizConfig 
+			eventPackages="cc.sitemaker.swiz.globaltags.events.*"
+			viewPackages="cc.sitemaker.swiz.globaltags.views.*"/>
+	</swiz:config>
+	
+	
+</swiz:Swiz>

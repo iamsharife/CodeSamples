@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="declareState ()" width="100%" height="100%">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import cc.sitemaker.puremvc.shell.StateVersion;
+			
+			import mx.states.State;
+			private function declareState ():void{
+			/* 	states = [
+						new State({name:StateVersion.FULL_VERSION, overrides :[advance1.enabled=true,advance2.enabled=true  ]}),
+						new State({name:StateVersion.TRIAL,overrides :[advance1.enabled=false,advance2.enabled=false  ]})
+						] */
+			}
+		]]>
+	</fx:Script>
+	
+	<s:states>
+		<s:State name='trialMode'/>
+		<s:State name='buyMode'/>
+	</s:states>
+	<s:Label top="10" text="hello PMVC">
+		
+	</s:Label>
+	<s:VGroup top="60">
+	<s:HGroup >
+		<s:Button label="basic feature 1 " />
+		<s:Button label="basic feature 2 " />
+		<s:Button label="basic feature 3" id="fireCommand"/>
+		<s:Button id="advance1" label="advance feature 1"  enabled.trialMode="false" enabled.buyMode="true" />
+		<s:Button id="advance2" label="advance Feature 2 " enabled.trialMode="false" enabled.buyMode="true" />
+	</s:HGroup>
+	<s:HGroup>
+		<s:Button id="buyFeature" label="buy more features"   enabled.trialMode="true" enabled.buyMode="false"/>
+		<s:Button id="expireTime" label="End Licence"  		  enabled.trialMode="false" enabled.buyMode="true"/>
+	</s:HGroup>
+	</s:VGroup>
+</s:Group>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<views:AbstractRegisterView xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:flow="cc.sitemaker.common.flow.*" width="100%" height="100%"
+				implements="cc.sitemaker.common.flow.IStateView" xmlns:views="cc.sitemaker.domains.register.views.*" xmlns:model="cc.sitemaker.domains.register.model.*" xmlns:user="cc.sitemaker.common.model.user.*">
+	
+	<fx:Declarations>
+		<s:RadioButtonGroup id="userType" selectedValue="{rbIndividual}" />
+
+	</fx:Declarations>
+	
+	<views:layout>
+		<s:VerticalLayout />
+	</views:layout>
+	
+	<s:VGroup width="100%" left="150">
+		<mx:Form width="100%" verticalGap="0">
+			<mx:FormHeading label="Your details" />
+			<mx:FormItem />
+			<mx:FormItem  direction="horizontal">
+				<s:RadioButton id="rbIndividual" label="Individual" group="{userType}" selected="true"/>
+				<s:RadioButton id="rbCompany" label="Company" group="{userType}" />
+			</mx:FormItem>
+			<mx:FormItem />
+			<mx:FormHeading label="First name" fontWeight="normal" />
+			<mx:FormItem required="true">
+				<s:TextInput id="firstName"  width="200" />
+			</mx:FormItem>
+			<mx:FormHeading label="Last name" fontWeight="normal" />
+			<mx:FormItem required="true">
+				<s:TextInput id="lastName"  width="200" />
+			</mx:FormItem>
+			<mx:FormHeading label="Company name" fontWeight="normal"
+							visible="{rbCompany.selected}" 
+							includeInLayout="{rbCompany.selected}" />
+			<mx:FormItem required="true"
+				visible="{rbCompany.selected}" 
+				includeInLayout="{rbCompany.selected}">
+				<s:TextInput id="companyName"  width="200" />
+			</mx:FormItem>
+			<mx:FormItem />
+			<mx:FormHeading label="Address" />
+			<mx:FormHeading label="Line 1" fontWeight="normal" />
+			<mx:FormItem required="true">
+				<s:TextInput id="addressLineOne"  width="200" />
+			</mx:FormItem>
+			<mx:FormHeading label="Line 2" fontWeight="normal" />
+			<mx:FormItem required="true">
+				<s:TextInput id="addressLineTwo"  width="200" />
+			</mx:FormItem>
+			<mx:FormHeading label="Line 3" fontWeight="normal" />
+			<mx:FormItem required="true">
+				<s:TextInput id="addressLineThree"  width="200" />
+			</mx:FormItem>
+			<mx:FormHeading label="Line 4" fontWeight="normal" />
+			<mx:FormItem required="true">
+				<s:TextInput id="addressLineFour"  width="200" />
+			</mx:FormItem>
+			<mx:FormItem />
+			<mx:FormHeading label="Country" fontWeight="normal"  />
+			<mx:FormItem required="true">
+				<s:DropDownList id="country" width="200" selectedIndex="0">
+					<s:dataProvider>
+						<s:ArrayList>
+							<fx:String>United Kingdom</fx:String>
+							<fx:String>United States</fx:String>
+						</s:ArrayList>
+					</s:dataProvider>
+				</s:DropDownList>
+			</mx:FormItem>
+			<mx:FormItem />
+			<mx:FormHeading label="Postcode" fontWeight="normal" />
+			<mx:FormItem direction="horizontal" required="true">
+				<s:TextInput id="postCodeOne"  maxChars="4" width="50" />
+				<s:TextInput id="postCodeTwo"  maxChars="3" width="40" />
+			</mx:FormItem>
+			<mx:FormItem />
+			<mx:FormHeading label="Phone number" fontWeight="normal" />
+			<mx:FormItem required="true">
+				<s:TextInput id="phoneNumber"  width="200" />
+			</mx:FormItem>
+			<mx:FormHeading label="Email address" fontWeight="normal" />
+			<mx:FormItem required="true">
+				<s:TextInput id="emailAddress"  width="200" />
+			</mx:FormItem>
+			<mx:FormItem />
+			<mx:FormItem>
+				<s:CheckBox id="whois" label="Hide my details from the WHOIS database. What's this?" />				
+			</mx:FormItem>
+		</mx:Form>
+	</s:VGroup>
+	<s:Line>
+		<s:stroke>
+			<s:SolidColorStroke color="#CCCCCC" />
+		</s:stroke>
+	</s:Line>
+	<s:HGroup width="100%" horizontalAlign="right">
+		<s:Button label="Back" click="performAction('back')" />
+		<s:Button label="Next" click="performAction('proceed')" />
+	</s:HGroup>
+</views:AbstractRegisterView>

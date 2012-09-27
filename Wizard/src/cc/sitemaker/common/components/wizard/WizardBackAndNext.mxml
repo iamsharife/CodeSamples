@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:HGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark" 
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	horizontalAlign="center">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.core.UIComponent;
+			
+			public static const MOVE_NEXT : String = "moveNext";
+			public static const MOVE_PREVIOUS : String = "movePrevious";
+			public static const GO_TO_LOGIN : String = "goToLogin";
+			
+			[Bindable]
+			public var pages : Array;
+			[Bindable]
+			public var selectedIndex : Number = 0;
+			[Bindable]
+			public var backButtonText : String = "Back";
+			[Bindable]
+			public var nextButtonText : String = "Next";
+			[Bindable]
+			public var finishButtonText : String = "Finish";
+			[Bindable]
+			public var cancelButtonText : String = "Cancel";
+			
+			private function get currentPage() : BaseWizardPage
+			{
+				return pages.getItemAt(selectedIndex) as BaseWizardPage;
+			}
+			
+			private function finalScreenReached(evt : Event) : void
+			{
+				btnBack.visible = false;
+				btnBack.includeInLayout = false;
+			}
+		]]>
+	</fx:Script>
+	
+	<s:Button id="btnBack"
+			   styleName="CustomButton"
+			   label="{backButtonText}"
+			   enabled="{selectedIndex > 0}"
+			   visible="{selectedIndex > 0}"
+			   click="dispatchEvent(new Event(MOVE_PREVIOUS))"
+			   height="40"
+			   width="100" />
+	<mx:Spacer width="100%" />
+	<s:Button id="btnNext"
+			   styleName="CustomButton"
+			   label="{nextButtonText}"
+			   enabled="{currentPage.isValid()}"
+			   visible="{selectedIndex != pages.length - 1}"
+			   includeInLayout="{selectedIndex != pages.length - 1}"
+			   click="dispatchEvent(new Event(MOVE_NEXT))"
+			   height="40"
+			   width="100" />
+	<s:Button id="btnFinish"
+			   styleName="CustomButton"
+			   label="{finishButtonText}"
+			   show="finalScreenReached( event )"
+			   click="dispatchEvent(new Event(MOVE_NEXT))"
+			   visible="{selectedIndex == pages.length - 1}"
+			   includeInLayout="{selectedIndex == pages.length - 1}"
+			   height="40"
+			   width="100" />
+	<mx:VBox paddingTop="10">
+		<mx:LinkButton label="{cancelButtonText}"
+					   click="Alert.show('Are you sure you wish to cancel?');"
+					   textDecoration="underline" />
+	</mx:VBox>
+	
+</s:HGroup>

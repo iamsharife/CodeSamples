@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%">
+	
+	<fx:Script>
+		<![CDATA[
+			import cc.sitemaker.swiz.globaltags.model.GlobalTagsPresentation;
+				
+			[Bindable]
+			[Inject]
+			public var model:GlobalTagsPresentation;
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<s:ArrayList id="globalTags" />
+	</fx:Declarations>
+		
+	<s:Label id="lbl" text="Global Tags" fontSize="24" />	
+	<s:List id="lstGlobalTags" width="100%" height="300" dataProvider="{model.tagModel.tags}" labelField="name"/>
+	<s:HGroup width="100%">
+		<s:TextInput id="txtNewTag" />
+		<s:Button id="btnAddToPost" label="Save Tag" click="model.onAddTag(event, txtNewTag.text)" />		
+	</s:HGroup>
+</s:VGroup>

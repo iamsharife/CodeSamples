@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<views:AbstractRegisterView xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx"
+				xmlns:flow="cc.sitemaker.common.flow.*" width="100%" height="100%"
+				implements="cc.sitemaker.common.flow.IStateView" xmlns:views="cc.sitemaker.domains.register.views.*">
+
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:VGroup width="100%">
+		
+		<s:HGroup width="100%">
+			<s:CheckBox label="Select all" />
+			<mx:Spacer width="150" />
+			<s:Label text="Search tearms: kevinicus, moonfruit, show all" />
+		</s:HGroup>
+		
+		<s:List width="100%" itemRenderer="cc.sitemaker.domains.components.DomainAvailableListRenderer" alternatingItemColors="{[0xECF2F8,0xFFFFFF]}">
+			<s:dataProvider>
+				<s:ArrayList>
+					<fx:Object domain="http://www.kevinicus.com" available="true" />
+					<fx:Object domain="http://www.kevinicus.co.uk" available="true" />
+					<fx:Object domain="http://www.kevinicus.net" available="true" />
+					<fx:Object domain="http://www.kevinicus.biz" available="true" />
+				</s:ArrayList>
+			</s:dataProvider>
+		</s:List>
+		
+		<s:HGroup width="100%" horizontalAlign="right" verticalAlign="middle">
+			<s:Label text="Pay in" />
+			<s:DropDownList id="currency" selectedIndex="0">
+				<s:dataProvider>
+					<s:ArrayList>
+						<fx:Object label="£ GBP" data="£" />
+						<fx:Object label="E EUR" data="E" />
+						<fx:Object label="$ USD" data="USD" />
+					</s:ArrayList>
+				</s:dataProvider>
+			</s:DropDownList>
+			<s:Label text="Sub total - {currency.selectedItem.data} 10.99" />
+		</s:HGroup>
+		
+		<s:Line width="100%">
+			<s:stroke>
+				<s:SolidColorStroke color="#CCCCCC" />
+			</s:stroke>
+		</s:Line>
+		
+		<s:HGroup width="100%" horizontalAlign="right">
+			<s:Button label="Search for another domain" click="performAction('back')" />
+			<s:Button label="Next"  click="performAction('proceed')" />
+		</s:HGroup>
+		
+		<s:List width="100%" itemRenderer="cc.sitemaker.domains.components.DomainUnavailableListRenderer">
+			<s:dataProvider>
+				<s:ArrayList>
+					<fx:Object domain="http://www.moonfruit.com" available="false" />
+					<fx:Object domain="http://www.moonfruit.co.uk" available="false" />
+					<fx:Object domain="http://www.moonfruit.eu" available="false" />
+					<fx:Object domain="http://www.moonfruit.net" available="false" />
+				</s:ArrayList>
+			</s:dataProvider>
+		</s:List>
+		
+	</s:VGroup>
+	
+</views:AbstractRegisterView>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		alpha="1" alpha.normal="0.6" width="100%">
+	
+	<fx:Declarations>
+		<fx:String id="label" />
+		<fx:Number id="index" />
+	</fx:Declarations>
+	
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="inprogress" />
+		<s:State name="done" />
+	</s:states>
+	
+	<s:Rect top="1" left="1" right="17" right.done="1" bottom="1" radiusX="4" radiusY="4">
+		<s:fill>
+			<s:SolidColor color="#FFFFFF" alpha="1" alpha.normal="0" />
+		</s:fill>
+	</s:Rect>
+	
+	<s:BitmapImage source="@Embed('/assets/processArrow.png')" right="0"  top="2" bottom="2" includeIn="inprogress" />
+	
+	<s:HGroup  top="2" left="5" right="15" bottom="2"
+			   paddingTop="11" 
+			   paddingLeft="5" 
+			   paddingRight="5" 
+			   paddingBottom="11" horizontalAlign="center" verticalAlign="middle">	
+		<s:Group height="100%">
+			
+			<s:Ellipse width="20" height="20" verticalCenter="0">
+				<s:stroke>
+					<s:SolidColorStroke color="#989898" color.normal="#bebebe" weight="1" />
+				</s:stroke>
+				<s:fill>
+					<s:LinearGradient rotation="45">
+						<s:GradientEntry color="#EDEDED" />
+						<s:GradientEntry color="#CCCCCC"  />
+					</s:LinearGradient>
+				</s:fill>
+				<s:fill.normal>
+						<s:SolidColor color="#ececec" />
+				</s:fill.normal>
+			</s:Ellipse>
+			
+			<s:Label text="{index+1}" verticalCenter="1" horizontalCenter="-1" fontSize="11" fontWeight="bold" fontFamily="_sans" color="#000000"
+					 />
+			
+		</s:Group>
+		
+		<s:Label id="labelDisplay" 
+				 text="{label}" fontFamily="_sans" color="#000000"/>
+		
+	</s:HGroup>
+</s:Group>

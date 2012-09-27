@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mate:LocalEventMap xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 xmlns:mate="http://mate.asfusion.com/">
+	
+	<fx:Script>
+		<![CDATA[			
+			import mx.events.ModuleEvent;
+			import mx.modules.ModuleLoader;
+			
+			import supportClasses.IApp;
+			import supportClasses.events.SMModuleEvent;
+			
+			private function getAppContainer():ModuleSpike{
+				return getDispatcher() as ModuleSpike;
+			}
+						
+			private function logIt(message:String):void{
+				trace("AppContainerEventMap::logIt",message);
+			}
+			
+			private function onExitModule(e:SMModuleEvent):void{
+				trace("AppContainerEventMap::onExitModule", e.newModule);
+				getAppContainer().appLoader.unloadModule();
+				getAppContainer().appLoader.url = e.newModule;
+			}
+			
+			private function onLoadModule(e:SMModuleEvent):void{
+				trace("AppContainerEventMap::onLoadModule", e.newModule);
+				var appLoader:ModuleLoader = getAppContainer().appLoader;
+
+				
+				if (!appLoader.url){
+					appLoader.url = e.newModule;
+				} else {
+					var app:IApp = appLoader.child as IApp;
+					if (appLoader.url == e.newModule){
+						// do a refresh?
+					} else {
+						app.moduleChangeRequest(e.newModule);
+					}
+				}
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		
+		<!--<mate:Debugger level="{Debugger.ALL}" />	-->
+		
+		<!-- Events fired from the module loader -->
+		<mate:EventHandlers type="{ModuleEvent.READY}">
+			<mate:InlineInvoker method="logIt" arguments="{['ModuleEvent.READY']}" />
+		</mate:EventHandlers>
+		
+		<mate:EventHandlers type="{ModuleEvent.ERROR}">
+			<mate:InlineInvoker method="logIt" arguments="{['ModuleEvent.ERROR']}" />
+		</mate:EventHandlers>
+		
+		<mate:EventHandlers type="{ModuleEvent.PROGRESS}">
+			<mate:InlineInvoker method="logIt" arguments="{['ModuleEvent.PROGRESS']}" />
+		</mate:EventHandlers>
+		
+		<mate:EventHandlers type="{ModuleEvent.UNLOAD}">
+			<mate:InlineInvoker method="logIt" arguments="{['ModuleEvent.UNLOAD']}" />
+		</mate:EventHandlers>
+		
+		<mate:EventHandlers type="{ModuleEvent.SETUP}">
+			<mate:InlineInvoker method="logIt" arguments="{['ModuleEvent.SETUP']}" />
+		</mate:EventHandlers>
+		
+		<mate:EventHandlers type="{SMModuleEvent.LOAD_MODULE}">
+			<!--<mate:InlineInvoker method="logIt" arguments="{['SMModuleEvent.LOAD_MODULE']}" />-->
+			<mate:InlineInvoker method="onLoadModule" arguments="{[event]}" />
+		</mate:EventHandlers>
+		
+		<mate:EventHandlers type="{SMModuleEvent.EXIT_MODULE}">
+			<!--<mate:InlineInvoker method="logIt" arguments="{['SMModuleEvent.EXIT_MODULE']}" />-->
+			<mate:InlineInvoker method="onExitModule" arguments="{[event]}" />
+		</mate:EventHandlers>
+		
+		
+	</fx:Declarations>
+	
+</mate:LocalEventMap>

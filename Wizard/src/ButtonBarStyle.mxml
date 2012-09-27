@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:wizard="cc.sitemaker.common.components.wizard.*">
+	
+	<fx:Declarations>
+		
+		<fx:Array id="views">
+			<fx:String>Search</fx:String>
+			<fx:String>Pick your domains</fx:String>
+			<fx:String>Verify</fx:String>
+			<fx:String>Purchase</fx:String>
+			<fx:String>Order review</fx:String>
+		</fx:Array>
+	</fx:Declarations>
+	
+	<s:VGroup verticalCenter="0" horizontalCenter="0">
+		
+		<wizard:Stepper dataProvider="{views}" selectedIndex="{viewstack.selectedIndex}" />		
+		<s:ButtonBar id="viewstack" requireSelection="true"  width="100%" dataProvider="{views}" />
+		
+	</s:VGroup>
+	
+	
+</s:Application>

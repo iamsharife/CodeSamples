@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wizard:BaseWizardPage xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark"  label="Your order" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:wizard="cc.sitemaker.common.components.wizard.*" width="100%">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:VGroup width="100%">
+		
+		<s:Label text="Your order" />
+		
+		<s:List width="100%" itemRenderer="cc.sitemaker.common.renderer.DomainAvailableListRenderer">
+			<s:dataProvider>
+				<s:ArrayList>
+					<fx:Object domain="http://www.moonfruit.com" available="false" />
+					<fx:Object domain="http://www.moonfruit.co.uk" available="false" />
+					<fx:Object domain="http://www.moonfruit.eu" available="false" />
+					<fx:Object domain="http://www.moonfruit.net" available="false" />
+				</s:ArrayList>
+			</s:dataProvider>
+		</s:List>
+		
+		<s:VGroup width="100%" horizontalAlign="right">
+			<s:VGroup horizontalAlign="right">
+				<s:Label text="Sub total" />
+				<s:HGroup verticalAlign="contentJustify">
+					<s:CheckBox label="Use my voucher" />
+					<s:Label text="Sub total" />
+				</s:HGroup>
+				<mx:HRule width="100%" />
+				<s:Label text="Total" />
+			</s:VGroup>
+			<mx:HRule width="100%" />
+		</s:VGroup>
+	</s:VGroup>
+	
+	
+</wizard:BaseWizardPage>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:swiz="http://swiz.swizframework.org" 
+			   xmlns:config="cc.sitemaker.swiz.shell.config.*" xmlns:views="cc.sitemaker.swiz.shell.views.*" xmlns:controller="cc.sitemaker.swiz.shell.controller.*"
+			   applicationComplete="SWFProfiler.init(stage, this)">
+	<fx:Script>
+		<![CDATA[
+			import cc.sitemaker.swiz.common.controller.StateController;
+			
+			/* SWFProfiler: Used to report memory usage in the application 
+			*/
+			import com.flashdynamix.utils.SWFProfiler;
+			
+			public var stateController:StateController;
+						 
+			/* postConstructEvent: This is called to instantiate the 
+			 * StateController for the statemachine of the application
+			*/
+			[PostConstruct]
+			public function postConstructEvent():void{
+							
+				stateController = new StateController( swiz.dispatcher );
+				
+			}
+		]]>
+	</fx:Script>
+	
+	
+	<fx:Declarations>
+		<!-- SwizConfig: This is where the swiz configuration is all set up
+		View config for more detail
+		-->
+		<config:Config id="swiz" />		
+	</fx:Declarations>
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" verticalAlign="middle" />
+	</s:layout>
+	
+	<views:MainView />
+	
+</s:Application>
